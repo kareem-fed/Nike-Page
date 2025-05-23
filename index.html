@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Nike Landing Page</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      * { scroll-behavior: smooth; }
+    </style>
+  </head>
+
+  <body class="bg-white text-gray-800">
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+      const Header = () => {
+        const [isOpen, setIsOpen] = React.useState(false);
+
+        const handleLinkClick = () => setIsOpen(false);
+
+        return (
+          <header className="p-6 shadow-2xl bg-white sticky top-0 z-50">
+            <div className="flex justify-between items-center max-w-7xl mx-auto">
+              <h1 className="text-3xl font-extrabold text-black">Nike</h1>
+
+              <button
+                className="md:hidden focus:outline-none"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <svg
+                  className="w-6 h-6 text-gray-800"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {isOpen ? (
+                    <path d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+
+              <nav className="hidden md:flex space-x-6 text-lg">
+                <a href="#home" className="hover:text-red-600">Home</a>
+                <a href="#features" className="hover:text-red-600">Features</a>
+                <a href="#products" className="hover:text-red-600">Products</a>
+                <a href="#testimonials" className="hover:text-red-600">Testimonials</a>
+                <a href="#contact" className="hover:text-red-600">Contact</a>
+              </nav>
+            </div>
+
+            {isOpen && (
+              <div className="md:hidden mt-4 space-y-2 text-center text-lg">
+                <a href="#home" onClick={handleLinkClick} className="block hover:text-red-600">Home</a>
+                <a href="#features" onClick={handleLinkClick} className="block hover:text-red-600">Features</a>
+                <a href="#products" onClick={handleLinkClick} className="block hover:text-red-600">Products</a>
+                <a href="#testimonials" onClick={handleLinkClick} className="block hover:text-red-600">Testimonials</a>
+                <a href="#contact" onClick={handleLinkClick} className="block hover:text-red-600">Contact</a>
+              </div>
+            )}
+          </header>
+        );
+      };
+
+      const Hero = () => (
+        <section id="home" className="flex flex-col-reverse md:flex-row items-center justify-between px-6 py-20 max-w-7xl mx-auto">
+          <div className="md:w-1/2 text-center md:text-left">
+            <h2 className="text-5xl md:text-6xl font-extrabold mb-4 leading-tight">
+              Discover the New<br/><span className="text-red-600">Nike Air</span>
+            </h2>
+            <p className="text-lg mb-6 text-gray-600">Step into the future of footwear with comfort and power.</p>
+            <button className="bg-red-600 text-white px-8 py-3 rounded-full text-lg hover:bg-red-700 transition">Shop Collection</button>
+          </div>
+          <div className="md:w-1/2 mb-10 md:mb-0 flex justify-center">
+            <img src="Imgs/NikeAir.png" alt="Nike Shoe" className="w-[80%] hover:scale-105 transition-transform duration-300" />
+          </div>
+        </section>
+      );
+
+      const Features = () => (
+        <section id="features" className="bg-gray-100 py-20">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <h3 className="text-3xl font-bold mb-10">Why Nike Air?</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div><h4 className="text-xl font-semibold mb-2">Lightweight Comfort</h4><p>Designed to feel like you're walking on air — literally.</p></div>
+              <div><h4 className="text-xl font-semibold mb-2">Durable Build</h4><p>Built with premium materials that last through the toughest conditions.</p></div>
+              <div><h4 className="text-xl font-semibold mb-2">Modern Style</h4><p>Looks as good on the streets as it performs in action.</p></div>
+            </div>
+          </div>
+        </section>
+      );
+
+      const Products = () => (
+        <section id="products" className="py-20 max-w-6xl mx-auto px-6">
+          <h3 className="text-3xl font-bold text-center mb-10">Our Collection</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {["Imgs/NikeAir1.png", "Imgs/NikeAir2.png", "Imgs/NikeAir3.png"].map((src, idx) => (
+              <div key={idx} className="shadow-lg rounded-xl overflow-hidden">
+                <img src={src} className="w-full hover:scale-105 transition-transform duration-300" alt={`Product ${idx+1}`} />
+                <div className="p-4">
+                  <h4 className="font-semibold text-xl mb-1">Nike Air {idx + 1}</h4>
+                  <p className="text-gray-600">$149.99</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+
+      const Testimonials = () => (
+        <section id="testimonials" className="bg-gray-100 py-20">
+          <div className="max-w-6xl mx-auto px-6 text-center">
+            <h3 className="text-3xl font-bold mb-10">What Our Customers Say</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {[
+                ["🔥 Best shoes ever!", "Ahmed from Egypt"],
+                ["👌 Stylish and comfy.", "Sarah from UAE"],
+                ["🚀 Light as air.", "Ali from KSA"]
+              ].map(([text, author], idx) => (
+                <div key={idx} className="bg-white p-6 shadow-xl rounded-lg">
+                  <p className="italic text-gray-600 mb-4">"{text}"</p>
+                  <span className="font-semibold text-gray-800">{author}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+
+      const Contact = () => (
+        <section id="contact" className="py-20 max-w-3xl mx-auto px-6">
+          <h3 className="text-3xl font-bold text-center mb-10">Get in Touch</h3>
+          <form className="space-y-6">
+            <input type="text" placeholder="Your Name" className="w-full p-3 border rounded-lg" />
+            <input type="email" placeholder="Your Email" className="w-full p-3 border rounded-lg" />
+            <textarea placeholder="Your Message" className="w-full p-3 border rounded-lg h-32"></textarea>
+            <button type="submit" className="bg-red-600 text-white px-6 py-3 rounded-full hover:bg-red-700 transition">Send Message</button>
+          </form>
+        </section>
+      );
+
+      const Footer = () => (
+        <footer className="text-center text-gray-500 py-6 border-t mt-20">
+          &copy; {new Date().getFullYear()} Nike. All rights reserved.
+        </footer>
+      );
+
+      const ScrollTop = () => (
+        <button 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="fixed bottom-6 right-6 bg-blue-600 text-white px-4 py-2 rounded-full shadow-md hover:bg-blue-700"
+        >
+          ↑ Top
+        </button>
+      );
+
+      const App = () => (
+        <>
+          <Header />
+          <Hero />
+          <Features />
+          <Products />
+          <Testimonials />
+          <Contact />
+          <Footer />
+          <ScrollTop />
+        </>
+      );
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
